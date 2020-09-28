@@ -35,6 +35,11 @@ server.on('listening', onListening);
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
+  
+  // start server port
+  var server_port = process.env.OPENSHIFT_NODEJS_PORT || 3031
+
+  var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0'
 
   if (isNaN(port)) {
     // named pipe
@@ -88,17 +93,4 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
-
-
-// start node server
-const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log('Node started on port ' + port);
-});
-
-
-// start server port
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 3031
-
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0'
 
