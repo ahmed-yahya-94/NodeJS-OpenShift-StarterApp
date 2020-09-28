@@ -9,18 +9,6 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-const http = require('http');
-
-const port = 5034
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -49,5 +37,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+const fs = require('fs');
+const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
 module.exports = app;
